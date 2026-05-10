@@ -1,0 +1,38 @@
+{
+  "name": "clientpilot-backend",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "migrate:build": "tsc -p tsconfig.migrate.json",
+    "migrate": "npm run migrate:build && node-pg-migrate -d $DATABASE_URL -m dist/migrations -j js",
+    "migrate:up": "npm run migrate:build && node-pg-migrate up -d $DATABASE_URL -m dist/migrations -j js",
+    "migrate:down": "npm run migrate:build && node-pg-migrate down -d $DATABASE_URL -m dist/migrations -j js",
+    "migrate:create": "node-pg-migrate create -m migrations -j ts"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "node-pg-migrate": "^8.0.4",
+    "pdfkit": "^0.18.0",
+    "pg": "^8.20.0",
+    "stripe": "^20.4.1",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^25.3.5",
+    "@types/pdfkit": "^0.17.5",
+    "@types/pg": "^8.18.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.9.3"
+  }
+}
